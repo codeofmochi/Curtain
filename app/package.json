@@ -2,12 +2,12 @@
   "name": "curtain",
   "version": "1.0.0",
   "description": "A light fixtures controllers for Capture Sweden, ArtNet, DMX, written in NodeJS",
-  "main": "index.html",
+  "main": "views/index.html",
   "author": "Alexandre CHAU <alexandre@chau.moe>",
   "license": "GPL-3.0",
   "window": {
-    "width": 1000,
-    "height": 700
+    "width": 1280,
+    "height": 720
   },
   "scripts": {
     "start": "nw",
