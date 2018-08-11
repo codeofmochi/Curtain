@@ -15,6 +15,7 @@ setInterval(() => {
 
     // dimmer channel
     artnet.set(1, 255)
+    artnet.set(2, intensity)
     artnet.set(4, intensity)
     artnet.set(5, intensity)
 
