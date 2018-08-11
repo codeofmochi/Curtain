@@ -23,4 +23,4 @@ Curtain makes use of the following great modules and their dependencies :
 
 ## Author
 
-Curtain is originally written by Alexandre CHAU <code@chau.moe>
+Curtain is originally written by Alexandre CHAU \<code@chau.moe>
