@@ -20,11 +20,9 @@ Curtain makes use of the following great modules and their dependencies :
 
 - **artnet** : a module that sends ArtDMX packages through the network to an Art-Net node
 - **nw** : packages a Chromium browser used as the app's GUI
-
-Curtain also uses several tools in its build chain :
-
+- **@fortawesome/fontawesome-free** : icons toolkit
 - **sass** : Sass compiler for GUI styling
-- **mustache** : templating for GUI building
+- **jquery** and **jquery-ui-dist** : UI libraries for web-based applications
 
 ## Author
 
