@@ -15,6 +15,7 @@ const ConsoleController = function ($, ui) {
     const library_brands = libraryView.find("#library_brands")
     const library_models = libraryView.find('#library_models')
     const library_variations = libraryView.find("#library_variations")
+
     // currently selected fixture
     var selected = null
 
@@ -64,10 +65,10 @@ const ConsoleController = function ($, ui) {
 
     // inserts a device into the app
     function insertDevice(device) {
-        const sliderWidth = 30
+        const devices_panel = $('#devices-panel')
         const container = $(`<div class="device"><h3>${device.name}</h3><p>${device.model}</p></div>`)
-        container.css("width", device.channels.length * 50)
-        device.channels.forEach(channel => {
+        container.css("width", device.channels.length * 40)
+        device.channels.forEach((channel, index) => {
             const channelBase = 1
             const channelBox = $('<div class="channel_box">')
             const slider = $('<div class="slider">')
@@ -76,16 +77,17 @@ const ConsoleController = function ($, ui) {
                 min: 0,
                 max: 255,
                 slide: (event, ui) => {
-                    artnet.set(channelBase + channel.index, ui.value)
+                    artnet.set(channelBase + index, ui.value)
                 }
             })
             channelBox.append(slider)
-            const label = (`<p>${channel.name}</p>`)
+            const label = (`<p>${channel}</p>`)
             channelBox.append(label)
             container.append(channelBox)
         })
-        container.draggable()
-        $('#devices-panel').append(container)
+        devices_panel.append(container)
+        // could make device draggable
+        // container.draggable()
     }
 
     return {

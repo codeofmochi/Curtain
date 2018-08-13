@@ -1,22 +1,10 @@
 {
-    "name": "",
-    "model": "Generic - RGBA Par - 4-channel",
+    "name": "Hello world",
+    "model": "Generic RGBA Par 4-channel",
     "channels": [
-        {
-            "name": "Dimmer",
-            "index": 0
-        },
-        {
-            "name": "Red",
-            "index": 1
-        },
-        {
-            "name": "Green",
-            "index": 2
-        },
-        {
-            "name": "Blue",
-            "index": 3
-        }
+        "Dimmer",
+        "Red",
+        "Green",
+        "Blue"
     ]
 }

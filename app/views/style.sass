@@ -19,9 +19,17 @@ body
     color: #fff
     font: normal 12px 'Open Sans', Arial, Helvetica, sans-serif
 
+p, a, h1, h2, h3, h4, h5, h6
+    padding: 0
+    margin: 0
+
 a
     text-decoration: none
     color: #fff
+
+h3
+    color: #ccc
+    font-weight: normal
 
 button
     float: left
@@ -55,7 +63,6 @@ button
     height: 100%
     text-align: center
     box-shadow: 0 0 $shadowSpread #000
-    z-index: 100
 
     a
         float: left
@@ -71,12 +78,16 @@ button
     text-transform: uppercase
     height: 100%
     width: calc(100% - #{$navWidth})
+    background: #111
 
 #toolbar
     float: left
-    background: #444
-    height: 65px
+    background: #2b2b2b
+    height: 55px
     width: 100%
+
+    h3
+        padding: 10px
 
 #console
     float: left
@@ -100,26 +111,34 @@ button
 
 #devices-panel
     float: left
-    width: 100%
-    height: calc(100% - 65px)
+    width: calc(100% - 10px)
+    height: calc(100% - 75px)
     overflow: auto
+    margin: 10px
 
 
 .device
     float: left
-    background: #222
+    background: #2b2b2b
     box-shadow: 0 0 5px #000
     padding: 10px
+    margin: 10px
+
+    h3
+        color: #ff7f00
+
+    p
+        font-size: 10px
 
     .channel_box
         float: left
         text-align: center
         margin: 0
-        width: 50px
+        width: 40px
 
         .slider
-            height: 150px
-            margin: 0 auto
+            height: 100px
+            margin: 10px auto
         
         p
             float: left
