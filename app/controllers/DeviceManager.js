@@ -27,11 +27,17 @@ function Device(deviceDescriptor, name, universe, baseChannel) {
     this.universe = universe
     this.channels = deviceDescriptor.channels.map((channel, index) => {
         const _num = _baseChannel + index
+        var _currentValue = 0
+
         return {
             name: channel,
             index: _num,
+            currentValue: () => {
+                return _currentValue
+            },
             update: (val) => {
-                DMXEmitter.send(universe, _num, val)
+                _currentValue = val
+                DMXEmitter.send(universe, _num, _currentValue)
             }
         }
     })
@@ -50,8 +56,8 @@ module.exports = {
     /**
      * Creates a device, registers it, and returns it
      */
-    makeDevice: (deviceDescriptor, name, baseChannel) => {
-        const dev = new Device(deviceDescriptor, name, baseChannel)
+    makeDevice: (deviceDescriptor, name, universe, baseChannel) => {
+        const dev = new Device(deviceDescriptor, name, universe, baseChannel)
         allDevices.push(dev)
         return dev
     },

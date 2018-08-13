@@ -88,6 +88,7 @@ const ConsoleController = function ($, ui, DeviceManager) {
                 orientation: "vertical",
                 min: 0,
                 max: 255,
+                value: channel.currentValue(),
                 slide: (event, ui) => {
                     channel.update(ui.value)
                 }
@@ -117,7 +118,10 @@ const ConsoleController = function ($, ui, DeviceManager) {
                     buttons: {
                         "Select": () => {
                             if (selected) {
-                                const dev = DeviceManager.makeDevice(selected, $('#library_name').val(), parseInt($('#library_universe')), parseInt($('#library_baseChannel').val()))
+                                const name =  $('#library_name').val()
+                                const universe =  parseInt($('#library_universe').val())
+                                const baseChannel = parseInt($('#library_baseChannel').val())
+                                const dev = DeviceManager.makeDevice(selected, name, universe, baseChannel)
                                 insertDevice(dev)
                             }
                             libraryView.dialog("close")
