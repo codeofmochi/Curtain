@@ -22,6 +22,14 @@ const UITools = function ($) {
                     then(dom)
                 }
             })
+        },
+
+        /**
+         * Loads an UI template from HTML at path
+         */
+        fromFileSync: (path) => {
+            const data = fs.readFileSync(path, 'utf-8')
+            return $(data)
         }
     }
 }

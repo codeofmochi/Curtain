@@ -28,6 +28,7 @@ button {
   text-decoration: none;
   padding: 10px;
   border: none;
+  cursor: pointer;
 }
 
 .padded {
@@ -77,10 +78,57 @@ button {
 #toolbar {
   float: left;
   background: #444;
+  height: 65px;
   width: 100%;
 }
 
 #console {
   float: left;
+  width: 100%;
+}
+
+#library {
+  width: 100%;
+}
+#library #library_brands, #library #library_models, #library #library_variations {
+  float: left;
+  width: 28%;
+  height: 300px;
+  overflow-y: auto;
+  margin: 0 1%;
+  border: 1px solid;
+}
+#library #library_brands a, #library #library_models a, #library #library_variations a {
+  padding: 5%;
+  display: block;
+  width: 90%;
+}
+
+#devices-panel {
+  float: left;
+  width: 100%;
+  height: calc(100% - 65px);
+  overflow: auto;
+}
+
+.device {
+  float: left;
+  background: #222;
+  box-shadow: 0 0 5px #000;
+  padding: 10px;
+}
+.device .channel_box {
+  float: left;
+  text-align: center;
+  margin: 0;
+  width: 50px;
+}
+.device .channel_box .slider {
+  height: 150px;
+  margin: 0 auto;
+}
+.device .channel_box p {
+  float: left;
+  display: block;
   width: 100%;
 }

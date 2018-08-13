@@ -4,8 +4,8 @@
  * @author Alexandre CHAU <code@chau.moe>
  */
 
-const ui = require('../controllers/ui')($)
-const view_console = require('../controllers/console')($, ui)
+const ui = require('../controllers/UI')($)
+const view_console = require('../controllers/Console')($, ui)
 
 
 $(document).ready(() => {
