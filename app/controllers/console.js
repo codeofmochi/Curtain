@@ -4,9 +4,8 @@
  * @author Alexandre CHAU <code@chau.moe>
  */
 const Library = require('../controllers/DeviceLibrary')
-const DeviceManager = require('../controllers/DeviceManager')
 
-const ConsoleController = function ($, ui) {
+const ConsoleController = function ($, ui, DeviceManager) {
     const libraryView = ui.fromFileSync('views/builders/devices_library.html')
     const library_brands = libraryView.find("#library_brands")
     const library_models = libraryView.find('#library_models')
@@ -64,6 +63,23 @@ const ConsoleController = function ($, ui) {
     function insertDevice(device) {
         const devices_panel = $('#devices-panel')
         const container = $(`<div class="device"><h3>${device.name}</h3><p>${device.model}</p></div>`)
+        const closeButton = $('<button class="close"><i class="fas fa-window-close"></i></button>')
+        closeButton.click(() => {
+            const confirm = $(`<div title="Warning"><p>Remove ${device.name} ?</p></div>`)
+            confirm.dialog({
+                buttons: {
+                    "Ok": () => {
+                        DeviceManager.removeDevice(device)
+                        container.remove()
+                        confirm.dialog("close")
+                    },
+                    "Cancel": () => {
+                        confirm.dialog("close")
+                    }
+                }
+            })
+        })
+        container.prepend(closeButton)
         container.css("width", device.channels.length * 40)
         device.channels.forEach(channel => {
             const channelBox = $('<div class="channel_box">')
@@ -92,12 +108,12 @@ const ConsoleController = function ($, ui) {
          */
         setup: () => {
             // insert already existing devices
-
+            DeviceManager.allDevices.forEach(device => insertDevice(device))
             // register button to add device
             fillLibraryView()
             $('#add-device-button').click(() => {
                 libraryView.dialog({
-                    width: 500,
+                    width: 600,
                     buttons: {
                         "Select": () => {
                             if (selected) {

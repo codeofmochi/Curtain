@@ -16,7 +16,7 @@ function Device(deviceDescriptor, name, universe, baseChannel) {
 
     var _baseChannel
     if (baseChannel) _baseChannel = baseChannel
-    else _baseChannel = 0
+    else _baseChannel = 1
 
     var _universe
     if (universe) _universe = universe
@@ -40,7 +40,7 @@ function Device(deviceDescriptor, name, universe, baseChannel) {
 /**
  * List of all live devices
  */
-var allDevices = []
+const allDevices = []
 
 module.exports = {
     /**
@@ -54,5 +54,12 @@ module.exports = {
         const dev = new Device(deviceDescriptor, name, baseChannel)
         allDevices.push(dev)
         return dev
+    },
+    /**
+     * Removes a device
+     */
+    removeDevice: (device) => {
+        const index = allDevices.indexOf(device)
+        allDevices.splice(index, 1)
     }
 }

@@ -1,6 +1,6 @@
 {
     "name": "Hello world",
-    "model": "Generic RGBA Par 4-channel",
+    "model": "Generic DRGB Par",
     "channels": [
         "Dimmer",
         "Red",

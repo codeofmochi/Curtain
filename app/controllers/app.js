@@ -5,7 +5,8 @@
  */
 
 const ui = require('../controllers/UI')($)
-const view_console = require('../controllers/Console')($, ui)
+const DeviceManager = require('../controllers/DeviceManager')
+const view_console = require('../controllers/Console')($, ui, DeviceManager)
 
 
 $(document).ready(() => {
