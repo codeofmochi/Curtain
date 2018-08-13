@@ -1,5 +1,5 @@
 /**
- * Controller of a library picker view
+ * Library manager, reads available devices from disk
  *
  * @author Alexandre CHAU <code@chau.moe>
  */

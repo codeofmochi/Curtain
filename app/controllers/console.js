@@ -3,12 +3,8 @@
  *
  * @author Alexandre CHAU <code@chau.moe>
  */
-
-const artnetConfig = {
-    host: "localhost"
-}
-const library = require('../controllers/LibraryManager')
-const artnet = require('artnet')(artnetConfig)
+const Library = require('../controllers/DeviceLibrary')
+const DeviceManager = require('../controllers/DeviceManager')
 
 const ConsoleController = function ($, ui) {
     const libraryView = ui.fromFileSync('views/builders/devices_library.html')
@@ -19,7 +15,7 @@ const ConsoleController = function ($, ui) {
     // currently selected fixture
     var selected = null
 
-    // helper to fill the library view
+    // helper to fill the Library view
     function fillLibraryView() {
         // reset lists
         library_brands.html("")
@@ -27,7 +23,7 @@ const ConsoleController = function ($, ui) {
         library_variations.html("")
         selected = null
 
-        library.getBrands().forEach(brand => {
+        Library.getBrands().forEach(brand => {
             // create a brand link, onclick reveals models
             const brandLink = $(`<a href="#">${brand}</a>`)
             brandLink.click(() => {
@@ -37,21 +33,22 @@ const ConsoleController = function ($, ui) {
                 // reset model list
                 library_models.html("")
                 library_variations.html("")
-                library.getModels(brand).forEach(model => {
+                Library.getModels(brand).forEach(model => {
                     // create a model link, onclick reveals variations
                     const modelLink = $(`<a href="#">${model}</a>`)
                     modelLink.click(() => {
+                        selected = null
                         modelLink.css("background", "#004d84")
                         modelLink.css("color", "#fff")
                         // reset variations list
                         library_variations.html("")
-                        library.getVariations(brand, model).forEach(variation => {
+                        Library.getVariations(brand, model).forEach(variation => {
                             // create a variation link, on click select the fixture
                             const variationLink = $(`<a href="#">${variation}</a>`)
                             variationLink.click(() => {
                                 variationLink.css("background", "#004d84")
                                 variationLink.css("color", "#fff")
-                                selected = library.loadFixture(brand, model, variation)
+                                selected = Library.loadFixture(brand, model, variation)
                             })
                             library_variations.append(variationLink)
                         })
@@ -68,8 +65,7 @@ const ConsoleController = function ($, ui) {
         const devices_panel = $('#devices-panel')
         const container = $(`<div class="device"><h3>${device.name}</h3><p>${device.model}</p></div>`)
         container.css("width", device.channels.length * 40)
-        device.channels.forEach((channel, index) => {
-            const channelBase = 1
+        device.channels.forEach(channel => {
             const channelBox = $('<div class="channel_box">')
             const slider = $('<div class="slider">')
             slider.slider({
@@ -77,12 +73,12 @@ const ConsoleController = function ($, ui) {
                 min: 0,
                 max: 255,
                 slide: (event, ui) => {
-                    artnet.set(channelBase + index, ui.value)
+                    channel.update(ui.value)
                 }
             })
             channelBox.append(slider)
-            const label = (`<p>${channel}</p>`)
-            channelBox.append(label)
+            channelBox.append(`<p>${channel.name}</p>`)
+            channelBox.append(`<p>${channel.index}</p>`)
             container.append(channelBox)
         })
         devices_panel.append(container)
@@ -95,6 +91,8 @@ const ConsoleController = function ($, ui) {
          * To be called when the console view is created
          */
         setup: () => {
+            // insert already existing devices
+
             // register button to add device
             fillLibraryView()
             $('#add-device-button').click(() => {
@@ -102,7 +100,10 @@ const ConsoleController = function ($, ui) {
                     width: 500,
                     buttons: {
                         "Select": () => {
-                            if (selected) insertDevice(selected)
+                            if (selected) {
+                                const dev = DeviceManager.makeDevice(selected, $('#library_name').val(), parseInt($('#library_universe')), parseInt($('#library_baseChannel').val()))
+                                insertDevice(dev)
+                            }
                             libraryView.dialog("close")
                         }
                     }
