@@ -4,13 +4,7 @@
  * @author Alexandre CHAU <code@chau.moe>
  */
 
-const ConsoleController = function (app) {
-    // dependencies requiring app context
-    const ui = require('../controllers/ui')(app)
-
-    // get jQuery from app context
-    $ = app.jquery
-
+const ConsoleController = function ($, ui) {
     return {
 
         /**
@@ -20,7 +14,6 @@ const ConsoleController = function (app) {
             // register button to add device
             $('#add-device-button').click(() => {
                 ui.fromFile('views/builders/devices_library.html', (dom) => {
-                    console.log("SETUP : dom built" + dom)
                     dom.dialog()
                 })
             })

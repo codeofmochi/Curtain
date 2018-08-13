@@ -6,10 +6,7 @@
 
 const fs = require('fs')
 
-const UITools = function (app) {
-    // get jQuery from app context
-    $ = app.jquery
-
+const UITools = function ($) {
     return {
 
         /**

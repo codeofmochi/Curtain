@@ -4,14 +4,8 @@
  * @author Alexandre CHAU <code@chau.moe>
  */
 
-// Expose app context
-const exports = {
-    // jQuery for controllers
-    jquery: $
-}
-
-const ui = require('../controllers/ui')(exports)
-const view_console = require('../controllers/console')(exports)
+const ui = require('../controllers/ui')($)
+const view_console = require('../controllers/console')($, ui)
 
 
 $(document).ready(() => {
