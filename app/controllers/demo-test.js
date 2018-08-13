@@ -1,3 +1,9 @@
+/**
+ * A test file for the artnet package
+ *
+ * @author Alexandre CHAU <code@chau.moe>
+ */
+
 const artnetConfig = {
     host: "localhost"
 }

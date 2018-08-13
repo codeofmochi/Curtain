@@ -2,6 +2,10 @@
     GUI styling for Curtain
     @author Alexandre CHAU <code@chau.moe>
 
+$shadowSpread: 4px
+$navWidth: 74px
+$totalNavWidth: $navWidth + $shadowSpread
+
 html, body
     margin: 0
     padding: 0
@@ -11,22 +15,44 @@ html, body
 body
     background: #2b2b2b
     color: #fff
-    font: normal 16px 'Open Sans', Arial, Helvetica, sans-serif
+    font: normal 12px 'Open Sans', Arial, Helvetica, sans-serif
 
 a
     text-decoration: none
     color: #fff
+
+button
+    float: left
+    display: block
+    background: #004d84
+    color: #fff
+    border-radius: 5px
+    text-decoration: none
+    padding: 10px
+    border: none
+
+.padded
+    padding: 10px
+
+.padded-15
+    padding: 15px
+
+.left
+    float: left
+
+.right
+    float: right
 
 #nav
     float: left
     position: absolute
     left: 0
     top: 0
-    width: 54px
+    width: $navWidth
     height: 100%
-    padding: 10px
     text-align: center
-    box-shadow: 0 0 4px #000
+    box-shadow: 0 0 $shadowSpread #000
+    z-index: 100
 
     a
         float: left
@@ -34,3 +60,20 @@ a
         font-size: 10px
         padding: 5px
         cursor: pointer
+
+#content
+    float: left
+    position: absolute
+    left: $navWidth
+    text-transform: uppercase
+    height: 100%
+    width: calc(100% - #{$navWidth})
+
+#toolbar
+    float: left
+    background: #444
+    width: 100%
+
+#console
+    float: left
+    width: 100%
